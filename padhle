@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Website</title>
+  <style>
+    /* Dark Mode Theme (Default) */
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      transition: background-color 0.5s, color 0.5s;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #e53935; /* Red */
+      color: #fff;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.5s;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-menu a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 10px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-menu a:hover {
+      background-color: #c62828; /* Darker Red */
+      border-radius: 5px;
+    }
+
+    .search-bar {
+      border: none;
+      padding: 5px;
+      border-radius: 5px;
+      outline: none;
+      width: 200px;
+    }
+
+    .profile-menu {
+      position: relative;
+      display: inline-block;
+    }
+
+    .profile-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .profile-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    .dropdown-content a {
+      color: #000;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .profile-menu:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Welcome Message */
+    .welcome-message {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #e53935, #c62828); /* Red gradient */
+      color: #fff;
+      border-radius: 10px;
+      margin: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .welcome-message h1 {
+      font-size: 28px;
+      margin: 0;
+      font-weight: bold;
+      font-family: 'Roboto', sans-serif; /* Cooler font */
+    }
+
+    .welcome-message p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    /* Book Card */
+    .book-card {
+      width: 100%;
+      max-width: 300px;
+      margin: 10px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      overflow: hidden;
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .book-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .book-card img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s;
+    }
+
+    .book-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .book-card .info {
+      padding: 15px;
+    }
+
+    .book-card .title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .book-card .description {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .book-card .read-now-btn {
+      background-color: #e53935; /* Red */
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      display: block;
+      margin: 10px auto;
+      transition: background-color 0.3s;
+    }
+
+    .book-card .read-now-btn:hover {
+      background-color: #c62828; /* Darker Red */
+    }
+
+    /* Feedback Form */
+    .feedback-form {
+      background-color: #007bff; /* Blue */
+      color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 80%;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    .feedback-form label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .feedback-form input, .feedback-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .feedback-form textarea {
+      resize: vertical;
+    }
+
+    .feedback-form button {
+      background-color: #fff;
+      color: #007bff; /* Blue */
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .feedback-form button:hover {
+      background-color: #0056b3; /* Darker Blue */
+      color: #fff;
+    }
+
+    /* About Section */
+    #about {
+      padding: 40px 20px;
+      background-color: #1e1e1e;
+      text-align: center;
+    }
+
+    #about h2 {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      font-family: 'Roboto', sans-serif; /* Cooler font */
+    }
+
+    #about p {
+      font-size: 20px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      font-family: 'Roboto', sans-serif; /* Cooler font */
+    }
+
+    /* Contact Section */
+    #contact {
+      padding: 20px;
+      background-color: #1e1e1e;
+      text-align: center;
+      position: relative;
+    }
+
+    #contact .line-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    #contact .line-link img {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+    }
+
+    #contact .line-link a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      font-family: 'Roboto', sans-serif; /* Cooler font */
+      display: flex;
+      align-items: center;
+    }
+
+    #theme-toggle {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      z-index: 999;
+    }
+
+    #theme-toggle img {
+      width: 24px;
+      height: 24px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">BookSite</div>
+    <div class="nav-menu">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <input type="text" class="search-bar" placeholder="Search...">
+    <div id="profile-menu" class="profile-menu">
+      <img src="https://i.pinimg.com/originals/94/a3/9e/94a39ef21411158e940c348aef68ba7b.jpg" alt="Profile" class="profile-icon">
+      <div class="dropdown-content">
+        <a href="#">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Welcome Section -->
+  <section class="welcome-message">
+    <h1>Welcome to the Ultimate Book Experience</h1>
+    <p>Immerse yourself in a world of literature, magic, and adventure.</p>
+  </section>
+
+  <!-- Book Card Example -->
+  <div class="book-card">
+    <img src="https://i.pinimg.com/originals/94/a3/9e/94a39ef21411158e940c348aef68ba7b.jpg" alt="Kaguya-sama: Love is War">
+    <div class="info">
+      <div class="title">Kaguya-sama: Love is War</div>
+      <div class="description">A battle of love, wits, and mind games. Who will confess first?</div>
+      <a href="https://drive.google.com/file/d/1vP-Sp52tHAsVwP6XrCacJ1XUVotU7xl-/view" class="read-now-btn">Start Reading</a>
+    </div>
+  </div>
+
+  <!-- Feedback Form Section -->
+  <section class="feedback-form">
+    <h2>Feedback Form</h2>
+    <form action="https://formspree.io/f/xanwgwdk" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="feedback">Feedback:</label>
+      <textarea id="feedback" name="feedback" rows="4" required></textarea>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Jet Black Wings</h2>
+    <p>Jet Black Wings, the bringer of darkness and the harbinger of truth, welcomes you to the grand tapestry of words. Here, legends come to life, and the shadows reveal their secrets.</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <div class="line-link">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" alt="Line logo">
+      <a href="https://line.me/ti/p/d_fV3D9Krz" target="_blank">Connect on Line</a>
+    </div>
+  </section>
+
+  <!-- Theme Toggle -->
+  <div id="theme-toggle">
+    <img id="theme-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/69/Black_circle_icon.svg" alt="Toggle Theme">
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+
+    themeToggle.addEventListener('click', () => {
+      if (document.body.style.backgroundColor === 'rgb(18, 18, 18)') {
+        // Switch to Light Mode
+        document.body.style.backgroundColor = '#fff';
+        document.body.style.color = '#000';
+        themeIcon.src = 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Sun_icon.svg'; // Sun icon for Light Mode
+      }else {
+        // Switch to Dark Mode
+        document.body.style.backgroundColor = '#121212';
+        document.body.style.color = '#e0e0e0';
+        themeIcon.src = 'https://upload.wikimedia.org/wikipedia/commons/6/69/Black_circle_icon.svg'; // Moon icon for Dark Mode
+      }
+    });
+  </script>
+</body>
+</html>           
