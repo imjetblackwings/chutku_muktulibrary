@@ -24,6 +24,7 @@
       align-items: center;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       transition: background-color 0.5s;
+      position: relative; /* Position relative for dropdown */
     }
 
     .logo {
@@ -77,15 +78,17 @@
       display: none;
       position: absolute;
       background-color: #fff;
-      min-width: 160px;
+      min-width: 200px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.2);
       z-index: 1;
       border-radius: 5px;
+      padding: 10px;
+      margin-top: 5px; /* Adjusted for spacing */
     }
 
     .dropdown-content a {
-      color: #000;
-      padding: 12px 16px;
+      color: #333; /* Dark color for better visibility */
+      padding: 8px 12px;
       text-decoration: none;
       display: block;
       transition: background-color 0.3s;
@@ -97,6 +100,20 @@
 
     .profile-menu:hover .dropdown-content {
       display: block;
+    }
+
+    .edit-profile {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .edit-profile label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .edit-profile input[type="file"] {
+      display: none;
     }
 
     /* Welcome Message */
@@ -292,98 +309,185 @@
       width: 24px;
       height: 24px;
     }
+
+    /* Popup Style */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .popup-content h2 {
+      margin: 0 0 20px;
+    }
+
+    .popup-content button {
+      background-color: #e53935; /* Red */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .popup-content button:hover {
+      background-color: #c62828; /* Darker Red */
+    }
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
-    <div class="logo">BookSite</div>
+    <div class="logo">Book Website</div>
     <div class="nav-menu">
-      <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
-    <input type="text" class="search-bar" placeholder="Search...">
-    <div id="profile-menu" class="profile-menu">
-      <img src="https://i.pinimg.com/originals/94/a3/9e/94a39ef21411158e940c348aef68ba7b.jpg" alt="Profile" class="profile-icon">
+    <div class="profile-menu">
+      <img class="profile-icon" src="https://via.placeholder.com/40" alt="Profile" id="profile-icon">
       <div class="dropdown-content">
-        <a href="#">Profile</a>
-        <a href="#">Settings</a>
-        <a href="#">Logout</a>
+        <a href="#" id="edit-profile-link">Edit Profile</a>
+        <a href="#" id="logout-link">Logout</a>
       </div>
     </div>
   </header>
 
-  <!-- Welcome Section -->
-  <section class="welcome-message">
-    <h1>Welcome to the Ultimate Book Experience</h1>
-    <p>Immerse yourself in a world of literature, magic, and adventure.</p>
-  </section>
+  <div class="welcome-message">
+    <h1>Welcome to the Book World!</h1>
+    <p>Explore your favorite books and connect with readers.</p>
+  </div>
 
-  <!-- Book Card Example -->
   <div class="book-card">
     <img src="https://i.pinimg.com/originals/94/a3/9e/94a39ef21411158e940c348aef68ba7b.jpg" alt="Kaguya-sama: Love is War">
     <div class="info">
       <div class="title">Kaguya-sama: Love is War</div>
       <div class="description">A battle of love, wits, and mind games. Who will confess first?</div>
-      <a href="https://drive.google.com/file/d/1vP-Sp52tHAsVwP6XrCacJ1XUVotU7xl-/view" class="read-now-btn">Start Reading</a>
+      <a href="https://drive.google.com/file/d/1vP-Sp52tHAsVwP6XrCacJ1XUVotU7xl-/view" class="read-now-btn">Read Now</a>
     </div>
   </div>
 
-  <!-- Feedback Form Section -->
-  <section class="feedback-form">
-    <h2>Feedback Form</h2>
-    <form action="https://formspree.io/f/xanwgwdk" method="POST">
+  <div class="feedback-form">
+    <h2>Feedback</h2>
+    <form id="feedback-form" action="https://formspree.io/f/xanwgwdk" method="POST">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required>
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="feedback">Feedback:</label>
-      <textarea id="feedback" name="feedback" rows="4" required></textarea>
-
-      <button type="submit">Submit Feedback</button>
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+      <button type="submit">Send Feedback</button>
     </form>
-  </section>
-
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Jet Black Wings</h2>
-    <p>Jet Black Wings, the bringer of darkness and the harbinger of truth, welcomes you to the grand tapestry of words. Here, legends come to life, and the shadows reveal their secrets.</p>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <div class="line-link">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" alt="Line logo">
-      <a href="https://line.me/ti/p/d_fV3D9Krz" target="_blank">Connect on Line</a>
-    </div>
-  </section>
-
-  <!-- Theme Toggle -->
-  <div id="theme-toggle">
-    <img id="theme-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/69/Black_circle_icon.svg" alt="Toggle Theme">
   </div>
 
-  <script>
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
+  <div id="about">
+    <h2>About Us</h2>
+    <p>We are passionate about connecting readers with their favorite books. Explore our collection and join the community!</p>
+  </div>
 
-    themeToggle.addEventListener('click', () => {
-      if (document.body.style.backgroundColor === 'rgb(18, 18, 18)') {
-        // Switch to Light Mode
-        document.body.style.backgroundColor = '#fff';
-        document.body.style.color = '#000';
-        themeIcon.src = 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Sun_icon.svg'; // Sun icon for Light Mode
-      }else {
-        // Switch to Dark Mode
-        document.body.style.backgroundColor = '#121212';
-        document.body.style.color = '#e0e0e0';
-        themeIcon.src = 'https://upload.wikimedia.org/wikipedia/commons/6/69/Black_circle_icon.svg'; // Moon icon for Dark Mode
+  <div id="contact">
+    <h2>Contact Us</h2>
+    <div class="line-link">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/LINE_logo.svg/1200px-LINE_logo.svg.png" alt="Line Icon">
+      <a href="https://line.me/ti/p/d_fV3D9Krz">Chat with us on Line</a>
+    </div>
+  </div>
+
+  <div id="theme-toggle">
+    <img src="https://image.shutterstock.com/image-vector/sun-moon-icon-isolated-on-600w-1981030789.jpg" alt="Toggle Theme">
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAknl5WA5gB1LXHBP6dSI1q02qK5Io4CgM",
+      authDomain: "web-auth1-b68ef.firebaseapp.com",
+      projectId: "web-auth1-b68ef",
+      storageBucket: "web-auth1-b68ef.appspot.com",
+      messagingSenderId: "919397820688",
+      appId: "1:919397820688:web:7ab7f02c6d99f4d432dd95"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // Show login popup on load
+    window.onload = () => {
+      const user = auth.currentUser;
+      if (!user) {
+        document.querySelector('.popup').style.display = 'flex';
+      }
+    };
+
+    document.querySelector('#logout-link').addEventListener('click', () => {
+      signOut(auth).then(() => {
+        alert("Logged out successfully.");
+      }).catch((error) => {
+        console.error("Logout error: ", error);
+      });
+    });
+
+    document.querySelector('#edit-profile-link').addEventListener('click', () => {
+      // Add your edit profile functionality here
+      alert("Edit profile functionality goes here.");
+    });
+
+    document.querySelector('.profile-icon').addEventListener('click', () => {
+      const user = auth.currentUser;
+      if (user) {
+        // Update the profile icon with the user's photo
+        document.getElementById('profile-icon').src = user.photoURL || 'https://via.placeholder.com/40';
       }
     });
+
+    document.querySelector('#feedback-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Handle feedback form submission
+      alert("Feedback submitted!");
+      document.getElementById('feedback-form').reset();
+    });
+
+    // Firebase authentication using Google sign-in
+    const loginWithGoogle = () => {
+      signInWithPopup(auth, provider).then((result) => {
+        const user = result.user;
+        document.getElementById('profile-icon').src = user.photoURL || 'https://via.placeholder.com/40';
+        alert("Login successful!");
+      }).catch((error) => {
+        console.error("Error during login: ", error);
+      });
+    };
+
+    // Trigger the Google login
+    document.querySelector('.popup-content button').addEventListener('click', loginWithGoogle);
   </script>
+
+  <!-- Popup for Login -->
+  <div class="popup" id="login-popup">
+    <div class="popup-content">
+      <h2>Login Required</h2>
+      <p>Please log in to continue.</p>
+      <button>Login with Google</button>
+    </div>
+  </div>
 </body>
 </html>
