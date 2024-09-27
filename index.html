@@ -24,7 +24,6 @@
       align-items: center;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       transition: background-color 0.5s;
-      position: relative; /* Position relative for dropdown */
     }
 
     .logo {
@@ -78,17 +77,15 @@
       display: none;
       position: absolute;
       background-color: #fff;
-      min-width: 200px;
+      min-width: 160px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.2);
       z-index: 1;
       border-radius: 5px;
-      padding: 10px;
-      margin-top: 5px; /* Adjusted for spacing */
     }
 
     .dropdown-content a {
-      color: #333; /* Dark color for better visibility */
-      padding: 8px 12px;
+      color: #000;
+      padding: 12px 16px;
       text-decoration: none;
       display: block;
       transition: background-color 0.3s;
@@ -100,20 +97,6 @@
 
     .profile-menu:hover .dropdown-content {
       display: block;
-    }
-
-    .edit-profile {
-      display: none;
-      margin-top: 10px;
-    }
-
-    .edit-profile label {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .edit-profile input[type="file"] {
-      display: none;
     }
 
     /* Welcome Message */
@@ -309,69 +292,35 @@
       width: 24px;
       height: 24px;
     }
-
-    /* Popup Style */
-    .popup {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .popup-content {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .popup-content h2 {
-      margin: 0 0 20px;
-    }
-
-    .popup-content button {
-      background-color: #e53935; /* Red */
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .popup-content button:hover {
-      background-color: #c62828; /* Darker Red */
-    }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <div class="logo">Book Website</div>
+    <div class="logo">BookSite</div>
     <div class="nav-menu">
+      <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
-    <div class="profile-menu">
-      <img class="profile-icon" src="https://via.placeholder.com/40" alt="Profile" id="profile-icon">
+    <input type="text" class="search-bar" placeholder="Search...">
+    <div id="profile-menu" class="profile-menu">
+      <img src="" alt="Profile" class="profile-icon" id="profile-icon">
       <div class="dropdown-content">
-        <a href="#" id="edit-profile-link">Edit Profile</a>
-        <a href="#" id="logout-link">Logout</a>
+        <a href="#" id="edit-profile">Edit Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
       </div>
     </div>
   </header>
 
-  <div class="welcome-message">
-    <h1>Welcome to the Book World!</h1>
-    <p>Explore your favorite books and connect with readers.</p>
-  </div>
+  <!-- Welcome Section -->
+  <section class="welcome-message">
+    <h1>Welcome to the Book Website</h1>
+    <p>Explore your favorite books!</p>
+  </section>
 
+  <!-- Book Section -->
   <div class="book-card">
     <img src="https://i.pinimg.com/originals/94/a3/9e/94a39ef21411158e940c348aef68ba7b.jpg" alt="Kaguya-sama: Love is War">
     <div class="info">
@@ -381,113 +330,117 @@
     </div>
   </div>
 
+  <!-- Feedback Form -->
   <div class="feedback-form">
     <h2>Feedback</h2>
-    <form id="feedback-form" action="https://formspree.io/f/xanwgwdk" method="POST">
+    <form action="https://formspree.io/f/xanwgwdk" method="POST">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
       <label for="message">Message:</label>
-      <textarea id="message" name="message" rows="4" required></textarea>
+      <textarea id="message" name="message" required></textarea>
       <button type="submit">Send Feedback</button>
     </form>
   </div>
 
+  <!-- About Section -->
   <div id="about">
     <h2>About Us</h2>
-    <p>We are passionate about connecting readers with their favorite books. Explore our collection and join the community!</p>
+    <p>We are passionate about books and love to share our thoughts with fellow readers.</p>
   </div>
 
+  <!-- Contact Section -->
   <div id="contact">
     <h2>Contact Us</h2>
     <div class="line-link">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/LINE_logo.svg/1200px-LINE_logo.svg.png" alt="Line Icon">
+      <img src="line-icon.png" alt="Line Icon">
       <a href="https://line.me/ti/p/d_fV3D9Krz">Chat with us on Line</a>
     </div>
   </div>
 
-  <div id="theme-toggle">
-    <img src="https://image.shutterstock.com/image-vector/sun-moon-icon-isolated-on-600w-1981030789.jpg" alt="Toggle Theme">
-  </div>
-
-  <!-- Firebase SDK -->
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyAknl5WA5gB1LXHBP6dSI1q02qK5Io4CgM",
-      authDomain: "web-auth1-b68ef.firebaseapp.com",
-      projectId: "web-auth1-b68ef",
-      storageBucket: "web-auth1-b68ef.appspot.com",
-      messagingSenderId: "919397820688",
-      appId: "1:919397820688:web:7ab7f02c6d99f4d432dd95"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
-
-    // Show login popup on load
-    window.onload = () => {
-      const user = auth.currentUser;
-      if (!user) {
-        document.querySelector('.popup').style.display = 'flex';
-      }
-    };
-
-    document.querySelector('#logout-link').addEventListener('click', () => {
-      signOut(auth).then(() => {
-        alert("Logged out successfully.");
-      }).catch((error) => {
-        console.error("Logout error: ", error);
-      });
-    });
-
-    document.querySelector('#edit-profile-link').addEventListener('click', () => {
-      // Add your edit profile functionality here
-      alert("Edit profile functionality goes here.");
-    });
-
-    document.querySelector('.profile-icon').addEventListener('click', () => {
-      const user = auth.currentUser;
-      if (user) {
-        // Update the profile icon with the user's photo
-        document.getElementById('profile-icon').src = user.photoURL || 'https://via.placeholder.com/40';
-      }
-    });
-
-    document.querySelector('#feedback-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      // Handle feedback form submission
-      alert("Feedback submitted!");
-      document.getElementById('feedback-form').reset();
-    });
-
-    // Firebase authentication using Google sign-in
-    const loginWithGoogle = () => {
-      signInWithPopup(auth, provider).then((result) => {
-        const user = result.user;
-        document.getElementById('profile-icon').src = user.photoURL || 'https://via.placeholder.com/40';
-        alert("Login successful!");
-      }).catch((error) => {
-        console.error("Error during login: ", error);
-      });
-    };
-
-    // Trigger the Google login
-    document.querySelector('.popup-content button').addEventListener('click', loginWithGoogle);
-  </script>
-
-  <!-- Popup for Login -->
-  <div class="popup" id="login-popup">
-    <div class="popup-content">
-      <h2>Login Required</h2>
-      <p>Please log in to continue.</p>
-      <button>Login with Google</button>
+  <!-- Profile Edit Modal -->
+  <div id="profile-modal" style="display:none; background-color: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999;">
+    <div style="background: #fff; margin: 100px auto; padding: 20px; width: 300px; border-radius: 10px; text-align: center;">
+      <h2>Edit Profile</h2>
+      <input type="text" id="username" placeholder="Enter your username" required>
+      <input type="file" id="profile-input" accept="image/*">
+      <img id="preview" src="" alt="Profile Preview" class="profile-icon" style="display:none; margin-top:10px;">
+      <button id="save-profile">Save</button>
+      <button id="close-modal">Close</button>
     </div>
   </div>
+
+  <!-- Theme Toggle Button -->
+  <div id="theme-toggle">
+    <img src="theme-icon.png" alt="Toggle Theme">
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const profileIcon = document.getElementById('profile-icon');
+      const profileModal = document.getElementById('profile-modal');
+      const usernameInput = document.getElementById('username');
+      const profileInput = document.getElementById('profile-input');
+      const preview = document.getElementById('preview');
+      const saveProfileButton = document.getElementById('save-profile');
+      const closeModalButton = document.getElementById('close-modal');
+
+      // Load saved profile data
+      const savedUsername = localStorage.getItem('username');
+      const savedProfilePic = localStorage.getItem('profilePic');
+
+      if (savedUsername) {
+        usernameInput.value = savedUsername;
+      }
+
+      if (savedProfilePic) {
+        profileIcon.src = savedProfilePic;
+        preview.src = savedProfilePic;
+      }
+
+      // Open profile modal
+      document.getElementById('edit-profile').addEventListener('click', function() {
+        profileModal.style.display = 'block';
+      });
+
+      // Close modal
+      closeModalButton.addEventListener('click', function() {
+        profileModal.style.display = 'none';
+      });
+
+      // Save profile changes
+      saveProfileButton.addEventListener('click', function() {
+        const username = usernameInput.value;
+        const file = profileInput.files[0];
+
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            localStorage.setItem('profilePic', e.target.result);
+            profileIcon.src = e.target.result;
+            preview.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+
+        localStorage.setItem('username', username);
+        profileModal.style.display = 'none';
+      });
+
+      // Preview profile picture
+      profileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
